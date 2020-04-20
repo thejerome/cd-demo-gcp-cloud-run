@@ -25,9 +25,8 @@ jobs:
           project_id: ${{ secrets.GCLOUD_PROJECT }}
           
       - name: Push image to Google Cloud Container Registry
-        with:
-          entrypoint: sh
-          args: -c "docker push eu.gcr.io/${{ secrets.GCLOUD_PROJECT }}/${{ secrets.GCLOUD_APP_NAME }}"
+        run: |
+          docker push eu.gcr.io/${{ secrets.GCLOUD_PROJECT }}/${{ secrets.GCLOUD_APP_NAME }}
           
       - name: Deploy to Cloud Run
         run: |-

@@ -36,6 +36,7 @@ jobs:
             --image eu.gcr.io/${{ secrets.GCLOUD_PROJECT }}/${{ secrets.GCLOUD_APP_NAME }} \
             --platform "managed" \
             --allow-unauthenticated
+             
 
 
 #       - name: Authenticate into Google Cloud Platform

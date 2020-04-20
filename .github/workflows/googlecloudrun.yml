@@ -12,6 +12,7 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v2
 
+
       - name: Build Docker image
         run: |
           docker build . --tag eu.gcr.io/${{ secrets.GCLOUD_PROJECT }}/${{ secrets.GCLOUD_APP_NAME }}
@@ -23,10 +24,14 @@ jobs:
           service_account_email: ${{ secrets.GCLOUD_EMAIL }}
           service_account_key: ${{ secrets.GCLOUD_AUTH }}
           project_id: ${{ secrets.GCLOUD_PROJECT }}
+
+      - name: Configure docker to use Google Cloud Container Registry
+        run: |
+          gcloud auth configure-docker
           
       - name: Push image to Google Cloud Container Registry
         run: |
-          gcloud docker push eu.gcr.io/${{ secrets.GCLOUD_PROJECT }}/${{ secrets.GCLOUD_APP_NAME }}
+          docker push eu.gcr.io/${{ secrets.GCLOUD_PROJECT }}/${{ secrets.GCLOUD_APP_NAME }}
           
       - name: Deploy to Cloud Run
         run: |-
